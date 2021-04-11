@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    android:layout_marginStart="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginBottom="10dp"
+    android:background="#3C3F41"
+  >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="411dp"
+        android:layout_height="734dp"
+        android:background="@color/purple_700"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="-1dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageViewlogo"
+            android:layout_width="match_parent"
+            android:layout_height="286dp"
+            android:layout_margin="@android:dimen/app_icon_size"
+            android:adjustViewBounds="false"
+            android:clickable="false"
+            android:orientation="vertical"
+            app:srcCompat="@mipmap/logo_large3" />
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="296dp"
+            android:layout_height="77dp"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:foregroundGravity="center"
+            android:includeFontPadding="true"
+            android:text="Start Game"
+            android:textSize="24sp"
+            app:backgroundTint="#F1C337"
+           />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
