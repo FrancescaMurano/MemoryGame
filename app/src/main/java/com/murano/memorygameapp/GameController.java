@@ -217,7 +217,7 @@ public class GameController extends AppCompatActivity {
 
                 } else { // <<--- card non uguali
                     if(soundOn) {
-                        MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), raw.error_sound);
+                        MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.error_sound);
                         mediaPlayer.start();
                     }
                     Animation animation = AnimationUtils.loadAnimation(GameController.this, anim.shake);
