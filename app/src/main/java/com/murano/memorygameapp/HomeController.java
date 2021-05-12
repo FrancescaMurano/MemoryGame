@@ -7,9 +7,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.murano.memorygameapp.GameController;
-import com.murano.memorygameapp.R;
-
 public class HomeController extends AppCompatActivity {
 
     private Button start_game;
@@ -18,7 +15,7 @@ public class HomeController extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        start_game = (Button) findViewById(R.id.btn_start);
+        start_game = (Button) findViewById(R.id.btn_register);
         start_game.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,9 +23,8 @@ public class HomeController extends AppCompatActivity {
             }
         });
     }
-
     public void startGame() {
-        Intent intent = new Intent(this, GameController.class);
+        Intent intent = new Intent(this, LoginController.class);
         startActivity(intent);
     }
 }

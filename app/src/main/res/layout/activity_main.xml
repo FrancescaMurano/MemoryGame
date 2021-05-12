@@ -26,7 +26,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imageViewlogo"
+            android:id="@+id/logo_login"
             android:layout_width="match_parent"
             android:layout_height="286dp"
             android:layout_margin="@android:dimen/app_icon_size"
@@ -36,7 +36,7 @@
             app:srcCompat="@mipmap/logo_large3" />
 
         <Button
-            android:id="@+id/btn_start"
+            android:id="@+id/btn_register"
             android:layout_width="296dp"
             android:layout_height="77dp"
             android:layout_gravity="center"

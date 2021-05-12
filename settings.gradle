@@ -1,2 +1,3 @@
+include ':sqlite-jdbc-3.7.2'
 include ':app'
 rootProject.name = "MemoryGameApp"

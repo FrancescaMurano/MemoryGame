@@ -1,31 +1,20 @@
 package com.murano.memorygameapp;
 
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.text.SpannableStringBuilder;
-import android.transition.Explode;
-import android.util.Log;
-import android.util.Pair;
-import android.view.ContextThemeWrapper;
-import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -35,34 +24,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 import static com.murano.memorygameapp.R.*;
 import static com.murano.memorygameapp.R.drawable.*;
-import static com.murano.memorygameapp.R.mipmap.ic_delete;
-import static com.murano.memorygameapp.R.mipmap.ic_launcher_round;
 import static com.murano.memorygameapp.R.mipmap.ic_sound;
 
-public class GameController extends AppCompatActivity {
+public class GameController_Level1 extends AppCompatActivity {
     private Button back;
     private Button sound;
     private FrameLayout btn1;
     private FrameLayout btn2;
     private FrameLayout btn3;
     private FrameLayout btn4;
-    private FrameLayout btn5;
-    private FrameLayout btn6;
-    private FrameLayout btn7;
-    private FrameLayout btn8;
-    private FrameLayout btn9;
-    private FrameLayout btn10;
-    private FrameLayout btn11;
-    private FrameLayout btn12;
+
 
     private FrameLayout selected_1;
     private Integer save_image;
@@ -74,41 +49,56 @@ public class GameController extends AppCompatActivity {
     private TextView text;
     private int correct;
     private boolean soundOn;
+    private Animation animation_flip;
 
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         soundOn = true;
-        setContentView(layout.start);
+        setContentView(layout.livel1);
         save_image = 0;
         max_click = 0;
         correct = 0;
         shuffle();
-        clicked = new boolean[12];
+        clicked = new boolean[4];
         for (boolean it : clicked)
             it = false;
 
         click = 0;
-        time = findViewById(id.timer);
+        time = findViewById(id.timer_liv2);
         time.setBase(SystemClock.elapsedRealtime());
         time.start();
+        text = (TextView) findViewById(id.mosse_field_liv1);
+        back = (Button) findViewById(id.btn_back_liv2);
+        sound = (Button) findViewById(id.btn_sound_liv2);
+        animation_flip = AnimationUtils.loadAnimation(GameController_Level1.this, anim.flip);
+        btn1 = (FrameLayout) findViewById(id.button1_l1);
+        btn2 = (FrameLayout) findViewById(id.button2_l1);
+        btn3 = (FrameLayout) findViewById(id.button3_l1);
+        btn4 = (FrameLayout) findViewById(id.button4_l1);
 
-        back = (Button) findViewById(id.btn_back);
-        sound = (Button) findViewById(id.btn_sound);
-        btn1 = (FrameLayout) findViewById(id.button1);
-        btn2 = (FrameLayout) findViewById(id.button2);
-        btn3 = (FrameLayout) findViewById(id.button3);
-        btn4 = (FrameLayout) findViewById(id.button4);
-        btn5 = (FrameLayout) findViewById(id.button5);
-        btn6 = (FrameLayout) findViewById(id.button6);
-        btn7 = (FrameLayout) findViewById(id.button7);
-        btn8 = (FrameLayout) findViewById(id.button8);
-        btn9 = (FrameLayout) findViewById(id.button9);
-        btn10 = (FrameLayout) findViewById(id.button10);
-        btn11 = (FrameLayout) findViewById(id.button11);
-        btn12 = (FrameLayout) findViewById(id.button12);
-        text = (TextView) findViewById(id.mosse_field);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public synchronized void run() {
+                show_preview();
+            }
+        }, 500);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public synchronized void run() {
+                try {
+                    hideAll();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 2000);
+
 
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -142,34 +132,49 @@ public class GameController extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-               if(soundOn) {
-                   soundOn = false;
-                   sound.setForeground(getDrawable(mipmap.ic_stop));
-               }
-               else {
-                   soundOn = true;
-                   sound.setForeground(getDrawable(mipmap.ic_sound));
-               }
+                if(soundOn) {
+                    soundOn = false;
+                    sound.setForeground(getDrawable(mipmap.ic_stop));
+                }
+                else {
+                    soundOn = true;
+                    sound.setForeground(getDrawable(ic_sound));
+                }
             }
         });
         btn1.setOnClickListener(getListener(btn1, 0));
         btn2.setOnClickListener(getListener(btn2, 1));
         btn3.setOnClickListener(getListener(btn3, 2));
         btn4.setOnClickListener(getListener(btn4, 3));
-        btn5.setOnClickListener(getListener(btn5, 4));
-        btn6.setOnClickListener(getListener(btn6, 5));
-        btn7.setOnClickListener(getListener(btn7, 6));
-        btn8.setOnClickListener(getListener(btn8, 7));
-        btn9.setOnClickListener(getListener(btn9, 8));
-        btn10.setOnClickListener(getListener(btn10, 9));
-        btn11.setOnClickListener(getListener(btn11, 10));
-        btn12.setOnClickListener(getListener(btn12, 11));
+
 
     }
 
+    public synchronized void show_preview(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            try {
 
-    public synchronized void show(FrameLayout btn, int n) {
+                btn1.setForeground(getDrawable(count_image.get(0)));
+                btn2.setForeground(getDrawable(count_image.get(1)));
+                btn3.setForeground(getDrawable(count_image.get(2)));
+                btn4.setForeground(getDrawable(count_image.get(3)));
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
+
+                System.out.println("sono in show temp");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    public void show(FrameLayout btn, int n) {
+
+        Animation animation = AnimationUtils.loadAnimation(GameController_Level1.this, anim.flip);
+        btn.setAnimation(animation);
         max_click++;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (max_click == 2) {
@@ -180,15 +185,15 @@ public class GameController extends AppCompatActivity {
                         MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), raw.success);
                         mediaPlayer.start();
                     }
-                    Animation animation = AnimationUtils.loadAnimation(GameController.this, anim.righttoleft);
-                    btn.startAnimation(animation);
-                    selected_1.startAnimation(animation);
+                    Animation anim1 = AnimationUtils.loadAnimation(GameController_Level1.this, anim.righttoleft);
+                    btn.startAnimation(anim1);
+                    selected_1.startAnimation(anim1);
                     btn.setVisibility(View.INVISIBLE);
                     selected_1.setVisibility(View.INVISIBLE);
                     max_click = 0;
                     correct++;
 
-                    if(correct == 6){
+                    if(correct == 2){
                         time.stop();
                         String time_result = time.getText().toString();
 
@@ -207,10 +212,10 @@ public class GameController extends AppCompatActivity {
                                         stop();
                                     }
                                 }).setPositiveButton("Ricomincia", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialoginterface, int i) {
-                                        restart();
-                                    }
-                                }).show();
+                            public void onClick(DialogInterface dialoginterface, int i) {
+                                restart();
+                            }
+                        }).show();
 
 
                     }
@@ -220,9 +225,9 @@ public class GameController extends AppCompatActivity {
                         MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.error_sound);
                         mediaPlayer.start();
                     }
-                    Animation animation = AnimationUtils.loadAnimation(GameController.this, anim.shake);
-                    Animation animation2 = AnimationUtils.loadAnimation(GameController.this, anim.shake);
-                    btn.startAnimation(animation);
+                    Animation animation1 = AnimationUtils.loadAnimation(GameController_Level1.this, anim.shake);
+                    Animation animation2 = AnimationUtils.loadAnimation(GameController_Level1.this, anim.shake);
+                    btn.startAnimation(animation1);
                     selected_1.startAnimation(animation2);
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -264,17 +269,16 @@ public class GameController extends AppCompatActivity {
     }
 
     public void stop() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, HomeController.class);
         startActivity(intent);
     }
     public void restart() {
-        Intent intent = new Intent(this, GameController.class);
+        Intent intent = new Intent(this, GameController_Level1.class);
         startActivity(intent);
     }
 
     public void shuffle() {
-        count_image  = new ArrayList<Integer>(Arrays.asList(mipmap.beaver, mipmap.beaver, mipmap.bird, mipmap.bird,
-                mipmap.cat, mipmap.cat, mipmap.dog, mipmap.dog, mipmap.dolphin, mipmap.dolphin, mipmap.duck, mipmap.duck));
+        count_image  = new ArrayList<Integer>(Arrays.asList(mipmap.candy_1,mipmap.candy_1, mipmap.candy_2,mipmap.candy_2));
         Collections.shuffle(count_image);
     }
 
@@ -285,9 +289,11 @@ public class GameController extends AppCompatActivity {
     }
 
     public View.OnClickListener getListener(FrameLayout f, int n) {
+        f.startAnimation(animation_flip);
         return (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 System.out.println("click"+ max_click);
                 if (clicked[n] == false && max_click!=2) {
                     System.out.println("LISTENER ");
@@ -314,6 +320,20 @@ public class GameController extends AppCompatActivity {
     public void cancel() {
         for (boolean it : clicked)
             it = false;
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public synchronized void hideAll() throws InterruptedException {
+        // Aspetta il suo turno
+
+        btn1.setForeground(getDrawable(cardstyle));
+        btn2.setForeground(getDrawable(cardstyle));
+        btn3.setForeground(getDrawable(cardstyle));
+        btn4.setForeground(getDrawable(cardstyle));
+        System.out.println("sono in hideAll");
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
 }
