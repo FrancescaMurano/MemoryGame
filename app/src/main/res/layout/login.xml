@@ -15,9 +15,9 @@
     android:screenOrientation="portrait">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="734dp"
+        android:id="@+id/linearLayout_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/purple_700"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,12 +27,11 @@
 
         <ImageView
             android:id="@+id/logo_login"
-            android:layout_width="294dp"
-            android:layout_height="170dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="40dp"
             android:orientation="vertical"
+            android:padding="30dp"
             app:srcCompat="@mipmap/logo_small_icon_only" />
 
         <EditText
@@ -49,19 +48,20 @@
             android:padding="10dp"
             android:textColor="@color/black" />
 
+
         <EditText
             android:id="@+id/password_login"
             android:layout_width="293dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/round_white"
             android:ems="10"
             android:gravity="center"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btn_register"
@@ -83,8 +83,8 @@
             android:layout_margin="5dp"
             android:gravity="center"
             android:padding="5dp"
-            android:textColor="@color/white"
-            android:text="Non sei ancora registrato? Registrati!" />
+            android:text="Non sei ancora registrato? Registrati!"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

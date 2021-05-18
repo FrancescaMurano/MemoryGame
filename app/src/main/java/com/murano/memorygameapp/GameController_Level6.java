@@ -4,12 +4,12 @@ package com.murano.memorygameapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -30,7 +30,7 @@ import static com.murano.memorygameapp.R.*;
 import static com.murano.memorygameapp.R.drawable.*;
 import static com.murano.memorygameapp.R.mipmap.ic_sound;
 
-public class GameController_Level2 extends AppCompatActivity {
+public class GameController_Level6 extends AppCompatActivity {
     private Button back;
     private Button sound;
     private FrameLayout btn1;
@@ -39,9 +39,13 @@ public class GameController_Level2 extends AppCompatActivity {
     private FrameLayout btn4;
     private FrameLayout btn5;
     private FrameLayout btn6;
+    private FrameLayout btn7;
+    private FrameLayout btn8;
+    private FrameLayout btn9;
+    private FrameLayout btn10;
+    private FrameLayout btn11;
+    private FrameLayout btn12;
     private int punteggio;
-
-
     private FrameLayout selected_1;
     private Integer save_image;
     private int max_click;
@@ -52,7 +56,7 @@ public class GameController_Level2 extends AppCompatActivity {
     private TextView text;
     private int correct;
     private boolean soundOn;
-    private Animation animation_flip;
+    private boolean prova = false;
 
 
 
@@ -61,30 +65,35 @@ public class GameController_Level2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         soundOn = true;
-        setContentView(layout.livel2);
+        setContentView(layout.livel6);
         save_image = 0;
         max_click = 0;
         correct = 0;
         shuffle();
-        clicked = new boolean[6];
+        clicked = new boolean[12];
         for (boolean it : clicked)
             it = false;
 
         click = 0;
-        time = findViewById(id.timer_liv2);
+        time = findViewById(id.timer_liv6);
         time.setBase(SystemClock.elapsedRealtime());
         time.start();
-        text = (TextView) findViewById(id.mosse_field_liv2);
-        back = (Button) findViewById(id.btn_back_liv2);
-        sound = (Button) findViewById(id.btn_sound_liv2);
-        animation_flip = AnimationUtils.loadAnimation(GameController_Level2.this, anim.flip);
-        btn1 = (FrameLayout) findViewById(id.button1_l2);
-        btn2 = (FrameLayout) findViewById(id.button2_l2);
-        btn3 = (FrameLayout) findViewById(id.button3_l2);
-        btn4 = (FrameLayout) findViewById(id.button4_l2);
-        btn5 = (FrameLayout) findViewById(id.button5_l2);
-        btn6 = (FrameLayout) findViewById(id.button6_l2);
 
+        back = (Button) findViewById(id.btn_back_liv6);
+        sound = (Button) findViewById(id.btn_sound_liv6);
+        btn1 = (FrameLayout) findViewById(id.button1_l6);
+        btn2 = (FrameLayout) findViewById(id.button2_l6);
+        btn3 = (FrameLayout) findViewById(id.button3_l6);
+        btn4 = (FrameLayout) findViewById(id.button4_l6);
+        btn5 = (FrameLayout) findViewById(id.button5_l6);
+        btn6 = (FrameLayout) findViewById(id.button6_l6);
+        btn7 = (FrameLayout) findViewById(id.button7_l6);
+        btn8 = (FrameLayout) findViewById(id.button8_l6);
+        btn9 = (FrameLayout) findViewById(id.button9_l6);
+        btn10 = (FrameLayout) findViewById(id.button10_l6);
+        btn11 = (FrameLayout) findViewById(id.button11_l6);
+        btn12 = (FrameLayout) findViewById(id.button12_l6);
+        text = (TextView) findViewById(id.mosse_field_liv6);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -102,7 +111,8 @@ public class GameController_Level2 extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }, 2000);
+        }, 4000);
+
 
 
 
@@ -153,7 +163,12 @@ public class GameController_Level2 extends AppCompatActivity {
         btn4.setOnClickListener(getListener(btn4, 3));
         btn5.setOnClickListener(getListener(btn5, 4));
         btn6.setOnClickListener(getListener(btn6, 5));
-
+        btn7.setOnClickListener(getListener(btn7, 6));
+        btn8.setOnClickListener(getListener(btn8, 7));
+        btn9.setOnClickListener(getListener(btn9, 8));
+        btn10.setOnClickListener(getListener(btn10, 9));
+        btn11.setOnClickListener(getListener(btn11, 10));
+        btn12.setOnClickListener(getListener(btn12, 11));
 
     }
 
@@ -167,9 +182,21 @@ public class GameController_Level2 extends AppCompatActivity {
                 btn4.setForeground(getDrawable(count_image.get(3)));
                 btn5.setForeground(getDrawable(count_image.get(4)));
                 btn6.setForeground(getDrawable(count_image.get(5)));
+                btn7.setForeground(getDrawable(count_image.get(6)));
+                btn8.setForeground(getDrawable(count_image.get(7)));
+                btn9.setForeground(getDrawable(count_image.get(8)));
+                btn10.setForeground(getDrawable(count_image.get(9)));
+                btn11.setForeground(getDrawable(count_image.get(10)));
+                btn12.setForeground(getDrawable(count_image.get(11)));
+                System.out.println("sono in show temp");
 
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                Animation animation = AnimationUtils.loadAnimation(GameController_Level6.this, anim.rotate);
+
+                btn1.setAnimation(animation);
+                btn4.setAnimation(animation);
+                btn7.setAnimation(animation);
+                btn10.setAnimation(animation);
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -178,10 +205,8 @@ public class GameController_Level2 extends AppCompatActivity {
 
 
     }
-    public void show(FrameLayout btn, int n) {
+    public  void show(FrameLayout btn, int n) {
 
-        Animation animation = AnimationUtils.loadAnimation(GameController_Level2.this, anim.flip);
-        btn.setAnimation(animation);
         max_click++;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (max_click == 2) {
@@ -192,15 +217,15 @@ public class GameController_Level2 extends AppCompatActivity {
                         MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), raw.success);
                         mediaPlayer.start();
                     }
-                    Animation anim1 = AnimationUtils.loadAnimation(GameController_Level2.this, anim.righttoleft);
-                    btn.startAnimation(anim1);
-                    selected_1.startAnimation(anim1);
+                    Animation animation = AnimationUtils.loadAnimation(GameController_Level6.this, anim.righttoleft);
+                    btn.startAnimation(animation);
+                    selected_1.startAnimation(animation);
                     btn.setVisibility(View.INVISIBLE);
                     selected_1.setVisibility(View.INVISIBLE);
                     max_click = 0;
                     correct++;
 
-                    if(correct == 3){
+                    if(correct == 6){
                         time.stop();
                         String time_result = time.getText().toString();
 
@@ -208,6 +233,7 @@ public class GameController_Level2 extends AppCompatActivity {
                             MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), raw.win_sound);
                             mediaPlayer.start();
                         }
+
                         if(click == correct)
                             punteggio = 3;
                         else if(click <= correct+4)
@@ -215,23 +241,24 @@ public class GameController_Level2 extends AppCompatActivity {
                         else
                             punteggio = 1;
 
-                        DatabaseHelper.save_point("Level_2",punteggio);
+                        DatabaseHelper.save_point("Level_6",punteggio);
+
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                         dialog.setCancelable(false);
                         setFinishOnTouchOutside(false);
                         dialog.setTitle( "Partita terminata" )
                                 .setIcon(mipmap.logo_small_icon_only)
-                                .setMessage("Hai vinto!!\nTempo Impiegato: "+ time_result + "\nStelle ottenute: "+ punteggio)
+                                .setMessage("Hai vinto!!\nTempo Impiegato: "+ time_result+ "\nStelle ottenute: "+ punteggio)
                                 .setNegativeButton("Esci", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialoginterface, int i) {
                                         stop();
                                     }
-                                }).setPositiveButton("Prossimo Livello", new DialogInterface.OnClickListener() {
+                                })/*.setPositiveButton("Prossimo Livello", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int i) {
                                 next();
                             }
-                        }).show();
+                        })*/.show();
 
 
                     }
@@ -241,9 +268,9 @@ public class GameController_Level2 extends AppCompatActivity {
                         MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.error_sound);
                         mediaPlayer.start();
                     }
-                    Animation animation1 = AnimationUtils.loadAnimation(GameController_Level2.this, anim.shake);
-                    Animation animation2 = AnimationUtils.loadAnimation(GameController_Level2.this, anim.shake);
-                    btn.startAnimation(animation1);
+                    Animation animation = AnimationUtils.loadAnimation(GameController_Level6.this, anim.shake);
+                    Animation animation2 = AnimationUtils.loadAnimation(GameController_Level6.this, anim.shake);
+                    btn.startAnimation(animation);
                     selected_1.startAnimation(animation2);
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -289,12 +316,14 @@ public class GameController_Level2 extends AppCompatActivity {
         startActivity(intent);
     }
     public void next() {
-        Intent intent = new Intent(this, GameController_Level3.class);
+        Intent intent = new Intent(this, GameController_Level6.class);
         startActivity(intent);
     }
 
     public void shuffle() {
-        count_image  = new ArrayList<Integer>(Arrays.asList(mipmap.coconut,mipmap.coconut,mipmap.apple,mipmap.apple, mipmap.lemon,mipmap.lemon));
+        count_image  = new ArrayList<Integer>(Arrays.asList(mipmap.colorpapers, mipmap.colorpapers, mipmap.watercolors, mipmap.watercolors,
+                mipmap.palette, mipmap.palette, mipmap.paintbrush, mipmap.paintbrush, mipmap.paintpalette, mipmap.paintpalette,
+                mipmap.pencils, mipmap.pencils));
         Collections.shuffle(count_image);
     }
 
@@ -305,11 +334,9 @@ public class GameController_Level2 extends AppCompatActivity {
     }
 
     public View.OnClickListener getListener(FrameLayout f, int n) {
-        f.startAnimation(animation_flip);
         return (new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 System.out.println("click"+ max_click);
                 if (clicked[n] == false && max_click!=2) {
                     System.out.println("LISTENER ");
@@ -350,8 +377,42 @@ public class GameController_Level2 extends AppCompatActivity {
         btn4.setForeground(getDrawable(cardstyle));
         btn5.setForeground(getDrawable(cardstyle));
         btn6.setForeground(getDrawable(cardstyle));
-
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        btn7.setForeground(getDrawable(cardstyle));
+        btn8.setForeground(getDrawable(cardstyle));
+        btn9.setForeground(getDrawable(cardstyle));
+        btn10.setForeground(getDrawable(cardstyle));
+        btn11.setForeground(getDrawable(cardstyle));
+        btn12.setForeground(getDrawable(cardstyle));
+        //System.out.println("sono in hideAll");
+        btn1.clearAnimation();
+        btn4.clearAnimation();
+        btn7.clearAnimation();
+        btn10.clearAnimation();
     }
 
+
+
+    private class Task extends AsyncTask<Integer, Integer, String> {
+        protected  String doInBackground(Integer... urls) {
+            show_preview();
+            return "ciao";
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        protected  void onProgressUpdate(Integer... progress) {
+            show_preview();
+
+
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        protected  void onPostExecute(Long result) {
+            try {
+                hideAll();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 }

@@ -112,152 +112,144 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <GridLayout
-                android:id="@+id/grid_liv4"
-                android:layout_width="379dp"
-                android:layout_height="473dp"
-                android:columnCount="3"
-                android:orientation="horizontal"
-                android:rowCount="4"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.45"
-                tools:layout_gravity="center"
-                android:layout_gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                >
-
-                <FrameLayout
-                    android:id="@+id/button1_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="@string/button"
-                    android:layout_gravity="center"
-                    tools:layout_gravity="center_horizontal" />
-
-
-                <FrameLayout
-                    android:id="@+id/button2_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    android:layout_gravity="center"
-                    tools:layout_gravity="center_horizontal" />
-
-                <FrameLayout
-                    android:id="@+id/button3_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-
-                    tools:layout_gravity="center_horizontal">
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/button4_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    tools:layout_gravity="center_horizontal" />
-
-                <FrameLayout
-                    android:id="@+id/button5_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    tools:layout_gravity="center_horizontal" />
-
-                <FrameLayout
-                    android:id="@+id/button6_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    app:backgroundTint="#FFFFFF"
-                    tools:layout_gravity="center_horizontal">
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/button7_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    app:backgroundTint="#FFFFFF"
-                    tools:layout_gravity="center_horizontal">
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/button8_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    app:backgroundTint="#FFFFFF"
-                    tools:layout_gravity="center_horizontal">
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/button9_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    app:backgroundTint="#FFFFFF"
-                    tools:layout_gravity="center_horizontal">
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/button10_l4"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_row="3"
-                    android:layout_column="1"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/cardstyle"
-                    android:foreground="@drawable/cardstyle"
-                    android:text="Button"
-                    app:backgroundTint="#FFFFFF"
-                    tools:layout_gravity="center_horizontal" />
-
-            </GridLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/grid_liv4"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="170dp"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:rowCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/firstLayout_liv4"
+        tools:layout_gravity="center">
+
+        <FrameLayout
+            android:id="@+id/button1_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="@string/button"
+            tools:layout_gravity="center_horizontal" />
+
+
+        <FrameLayout
+            android:id="@+id/button2_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            tools:layout_gravity="center_horizontal" />
+
+        <FrameLayout
+            android:id="@+id/button3_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+
+            tools:layout_gravity="center_horizontal">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button4_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            tools:layout_gravity="center_horizontal" />
+
+        <FrameLayout
+            android:id="@+id/button5_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            tools:layout_gravity="center_horizontal" />
+
+        <FrameLayout
+            android:id="@+id/button6_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            app:backgroundTint="#FFFFFF"
+            tools:layout_gravity="center_horizontal">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button7_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            app:backgroundTint="#FFFFFF"
+            tools:layout_gravity="center_horizontal">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button8_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            app:backgroundTint="#FFFFFF"
+            tools:layout_gravity="center_horizontal">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button9_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            app:backgroundTint="#FFFFFF"
+            tools:layout_gravity="center_horizontal">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button10_l4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/cardstyle"
+            android:foreground="@drawable/cardstyle"
+            android:text="Button"
+            app:backgroundTint="#FFFFFF"
+            tools:layout_gravity="center_horizontal" />
+
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,6 +37,7 @@ public class GameController_Level1 extends AppCompatActivity {
     private FrameLayout btn2;
     private FrameLayout btn3;
     private FrameLayout btn4;
+    private int punteggio;
 
 
     private FrameLayout selected_1;
@@ -79,6 +80,8 @@ public class GameController_Level1 extends AppCompatActivity {
         btn2 = (FrameLayout) findViewById(id.button2_l1);
         btn3 = (FrameLayout) findViewById(id.button3_l1);
         btn4 = (FrameLayout) findViewById(id.button4_l1);
+
+
 
 
         new Handler().postDelayed(new Runnable() {
@@ -161,7 +164,6 @@ public class GameController_Level1 extends AppCompatActivity {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-
                 System.out.println("sono in show temp");
 
             } catch (Exception e) {
@@ -196,6 +198,14 @@ public class GameController_Level1 extends AppCompatActivity {
                     if(correct == 2){
                         time.stop();
                         String time_result = time.getText().toString();
+                        if(click == correct)
+                            punteggio = 3;
+                        else if(click <= correct+4)
+                            punteggio = 2;
+                        else
+                            punteggio = 1;
+
+                        DatabaseHelper.save_point("Level_1",punteggio);
 
                         if(soundOn) {
                             MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), raw.win_sound);
@@ -206,14 +216,14 @@ public class GameController_Level1 extends AppCompatActivity {
                         setFinishOnTouchOutside(false);
                         dialog.setTitle( "Partita terminata" )
                                 .setIcon(mipmap.logo_small_icon_only)
-                                .setMessage("Hai vinto!!\nTempo Impiegato: "+ time_result)
+                                .setMessage("Livello Completato!!\nTempo Impiegato: "+ time_result + "\n Stelle ottenute : " + punteggio)
                                 .setNegativeButton("Esci", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialoginterface, int i) {
                                         stop();
                                     }
-                                }).setPositiveButton("Ricomincia", new DialogInterface.OnClickListener() {
+                                }).setPositiveButton("Prossimo Livello", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int i) {
-                                restart();
+                                next();
                             }
                         }).show();
 
@@ -265,15 +275,16 @@ public class GameController_Level1 extends AppCompatActivity {
             btn.setForeground(getDrawable(cardstyle));
             System.out.println("NOT SHOW");
 
+
         }
     }
 
     public void stop() {
-        Intent intent = new Intent(this, HomeController.class);
+        Intent intent = new Intent(this, LevelsController.class);
         startActivity(intent);
     }
-    public void restart() {
-        Intent intent = new Intent(this, GameController_Level1.class);
+    public void next() {
+        Intent intent = new Intent(this, GameController_Level2.class);
         startActivity(intent);
     }
 

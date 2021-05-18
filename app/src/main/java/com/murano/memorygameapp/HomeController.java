@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+
 public class HomeController extends AppCompatActivity {
 
     private Button start_game;
@@ -22,6 +24,21 @@ public class HomeController extends AppCompatActivity {
                 startGame();
             }
         });
+
+        DatabaseHelper db = new DatabaseHelper(this);
+
+           /* try {
+                db = new Database(this);
+                DatabaseOpenHelper open = new DatabaseOpenHelper(this);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        db.open();
+            db.test();
+        db.close();*/
     }
     public void startGame() {
         Intent intent = new Intent(this, LoginController.class);

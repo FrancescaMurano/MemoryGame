@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -45,7 +46,7 @@ public class GameController_Level3 extends AppCompatActivity {
     private FrameLayout btn6;
     private FrameLayout btn7;
     private FrameLayout btn8;
-
+    private int punteggio;
 
     private FrameLayout selected_1;
     private Integer save_image;
@@ -66,6 +67,8 @@ public class GameController_Level3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         soundOn = true;
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         setContentView(layout.livel3);
         save_image = 0;
         max_click = 0;
@@ -219,19 +222,28 @@ public class GameController_Level3 extends AppCompatActivity {
                             MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), raw.win_sound);
                             mediaPlayer.start();
                         }
+                        if(click == correct)
+                            punteggio = 3;
+                        else if(click <= correct+4)
+                            punteggio = 2;
+                        else
+                            punteggio = 1;
+
+                        DatabaseHelper.save_point("Level_3",punteggio);
+
                         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                         dialog.setCancelable(false);
                         setFinishOnTouchOutside(false);
                         dialog.setTitle( "Partita terminata" )
                                 .setIcon(mipmap.logo_small_icon_only)
-                                .setMessage("Hai vinto!!\nTempo Impiegato: "+ time_result)
+                                .setMessage("Hai vinto!!\nTempo Impiegato: "+ time_result+ "\nStelle ottenute: "+ punteggio)
                                 .setNegativeButton("Esci", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialoginterface, int i) {
                                         stop();
                                     }
-                                }).setPositiveButton("Ricomincia", new DialogInterface.OnClickListener() {
+                                }).setPositiveButton("Prossimo Livello", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialoginterface, int i) {
-                                restart();
+                                next();
                             }
                         }).show();
 
@@ -287,11 +299,11 @@ public class GameController_Level3 extends AppCompatActivity {
     }
 
     public void stop() {
-        Intent intent = new Intent(this, HomeController.class);
+        Intent intent = new Intent(this, LevelsController.class);
         startActivity(intent);
     }
-    public void restart() {
-        Intent intent = new Intent(this, GameController_Level3.class);
+    public void next() {
+        Intent intent = new Intent(this, GameController_Level4.class);
         startActivity(intent);
     }
 
