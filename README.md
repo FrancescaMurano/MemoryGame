@@ -10,4 +10,7 @@ Features:
 
 - Score Tracking: Memory Master keeps track of players' scores and elapsed time, encouraging friendly competition among users to achieve the fastest completion times and the highest scores.
 
+<a href="#"><img src="example.jpg" width="200" height="360" alt="Memory Game Example"></a>
+<a href="#"><img src="example2.jpg" width="200" height="360" alt="Memory Game Example"></a>
+<a href="#"><img src="example3.jpg" width="200" height="360" alt="Memory Game Example"></a>
 
